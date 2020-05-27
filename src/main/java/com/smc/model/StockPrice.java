@@ -12,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "vw_stock_price")
-public class StockPrice {
+public class StockPrice{
+	
 	@Id
 	@Column(name="id")
+	@JsonFormat
 	private String id;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -22,16 +24,24 @@ public class StockPrice {
 	private Timestamp date;
 
 	@Column(name = "price")
+	@JsonFormat
 	private BigDecimal price;
 	
 	@Column(name = "comp_id")
+	@JsonFormat
 	private String compId;
 	
 	@Column(name = "exchange_id")
+	@JsonFormat
 	private String exchangeId;
 	
 	@Column(name = "stock_code")
+	@JsonFormat
 	private String stockCode;
+	
+	public StockPrice() {
+		
+	}
 
 	public String getId() {
 		return id;

@@ -34,7 +34,8 @@ public class StockPriceController {
 				rsArray.add(sp);
 			});
 		});
-		return rsArray; 
+		return rsArray;
+//		return rsArray.toArray(new StockPrice[rsArray.size()]); 
 	}
 	
 	@PostMapping("/")

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 public class QueryVO {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
