@@ -1,5 +1,6 @@
 package com.smc.controller;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.naming.java.javaURLContextFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,6 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.smc.model.StockPrice;
 import com.smc.vo.CompanyExchangeQuery;
 import com.smc.vo.QueryVO;
+import com.smc.vo.StockPriceRespVO;
 
 
 @RunWith(SpringRunner.class)
@@ -73,12 +76,12 @@ class StockPriceControllerTest {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<QueryVO> httpRequst =new HttpEntity<QueryVO>(queryVO, headers);
-		ParameterizedTypeReference<StockPrice[]> typeReference = new ParameterizedTypeReference<StockPrice[]>() {};
-		ResponseEntity<StockPrice[]> response = restTemplate.exchange("/stockprice/search", HttpMethod.POST, httpRequst, typeReference);
-        StockPrice[] arrStockPrices = response.getBody();
+		ParameterizedTypeReference<StockPriceRespVO[]> typeReference = new ParameterizedTypeReference<StockPriceRespVO[]>() {};
+		ResponseEntity<StockPriceRespVO[]> response = restTemplate.exchange("/stockprice/search", HttpMethod.POST, httpRequst, typeReference);
+		StockPriceRespVO[] arrStockPrices = response.getBody();
         
-        for(StockPrice item: arrStockPrices) {
-        	System.out.println("name>>"+item.getStockCode());
+        for(StockPriceRespVO item: arrStockPrices) {
+        	System.out.println("name>>"+item.getCompanyId());
         }
 	}
 

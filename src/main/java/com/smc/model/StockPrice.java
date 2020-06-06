@@ -1,7 +1,7 @@
 package com.smc.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 import javax.persistence.*;
 
@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "vw_stock_price")
+@IdClass(IdDay.class)
 public class StockPrice{
 	
 	@Id
@@ -19,30 +20,19 @@ public class StockPrice{
 	@JsonFormat
 	private String id;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	@Column(name = "date")
-	private Timestamp date;
+	@Id
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@Column(name = "day")
+	private String day;
 
 	@Column(name = "price")
 	@JsonFormat
 	private BigDecimal price;
 	
-	@Column(name = "comp_id")
-	@JsonFormat
-	private String compId;
-	
-	@Column(name = "exchange_id")
-	@JsonFormat
-	private String exchangeId;
-	
-	@Column(name = "stock_code")
-	@JsonFormat
-	private String stockCode;
-	
 	public StockPrice() {
 		
 	}
-
+	
 	public String getId() {
 		return id;
 	}
@@ -50,13 +40,13 @@ public class StockPrice{
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public Timestamp getDate() {
-		return date;
+	
+	public String getDay() {
+		return day;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 	public BigDecimal getPrice() {
@@ -67,27 +57,31 @@ public class StockPrice{
 		this.price = price;
 	}
 
-	public String getCompId() {
-		return compId;
+}
+
+class IdDay implements Serializable{
+	 
+	private static final long serialVersionUID = 6440618584111311842L;
+
+	private String id;
+	 
+	private String day;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setCompId(String compId) {
-		this.compId = compId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getExchangeId() {
-		return exchangeId;
+	public String getDay() {
+		return day;
 	}
 
-	public void setExchangeId(String exchangeId) {
-		this.exchangeId = exchangeId;
+	public void setDay(String day) {
+		this.day = day;
 	}
-
-	public String getStockCode() {
-		return stockCode;
-	}
-
-	public void setStockCode(String stockCode) {
-		this.stockCode = stockCode;
-	}
+	 
+	 
 }
